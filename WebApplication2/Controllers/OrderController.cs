@@ -2,6 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
 using WebApplication2.Services;
+using WebApplication2.Models.ViewModels;
+using WebApplication2.Models.ViewModels.OrderViewModels; 
+
+/// <summary>
+/// Принять запрос и передать в обработку 
+/// </summary>
 
 namespace WebApplication2.Controllers
 {
@@ -23,31 +29,38 @@ namespace WebApplication2.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetById(Guid id = default)
+        public IActionResult GetById(GetByIdOrderViewModel orderModel)
         {
-            if (id == Guid.Empty) return BadRequest();
-            var user = _orderService.GetById(id);
+            if (orderModel.Id == Guid.Empty) return BadRequest();
+            var user = _orderService.GetById(orderModel);
             return Ok(user);
         }
 
         [HttpPost]
-        public IActionResult Save(Order order)
+        public IActionResult Save(CreateOrderViewModel orderModel)
         {
-            var isSuccess = _orderService.Save(order);
+            var isSuccess = _orderService.Save(orderModel);
             return Ok(isSuccess);
         }
 
         [HttpPut]
-        public IActionResult Edit(Order order)
+        public IActionResult Edit(EditOrderViewModel orderModel)
         {
-            var isSuccess = _orderService.Edit(order);
+            var isSuccess = _orderService.Edit(orderModel);
             return Ok(isSuccess);
         }
 
         [HttpDelete]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(DeleteOrderViewModel orderModel)
         {
-            var isSuccess = _orderService.Delete(id);
+            var isSuccess = _orderService.Delete(orderModel);
+            return Ok(isSuccess);
+        }
+
+        [HttpGet]
+        public IActionResult GetOrdersByCreator(GetOrdersByCreator orderModel)
+        {
+            var isSuccess = _orderService.GetOrdersByCreator(orderModel);
             return Ok(isSuccess);
         }
     }

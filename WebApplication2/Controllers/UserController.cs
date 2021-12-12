@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Models;
 using WebApplication2.Services;
+using WebApplication2.Models.ViewModels.UserViewModel;
 
 namespace WebApplication2.Controllers
 {
@@ -23,31 +24,31 @@ namespace WebApplication2.Controllers
         }
        
         [HttpGet]
-        public IActionResult GetById(Guid id = default)
+        public IActionResult GetById(GetByIdUser userModel)
         {
-            if (id == Guid.Empty) return BadRequest();
-            var user = _userService.GetById(id);
+            if (userModel.Id == Guid.Empty) return BadRequest();
+            var user = _userService.GetById(userModel);
             return Ok(user);
         }
 
         [HttpPost]
-        public IActionResult Save(User user)
+        public IActionResult Save(CreateUserViewModel userModel)
         {
-            var isSuccess = _userService.Save(user);
+            var isSuccess = _userService.Save(userModel);
             return Ok(isSuccess);
         }
 
         [HttpPut]
-        public IActionResult Edit(User user)
+        public IActionResult Edit(EditUserViewModel userModel)
         {
-            var isSuccess = _userService.Edit(user);
+            var isSuccess = _userService.Edit(userModel);
             return Ok(isSuccess);
         }
 
         [HttpDelete]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(DeleteUserViewModel userModel)
         {
-            var isSuccess = _userService.Delete(id);
+            var isSuccess = _userService.Delete(userModel);
             return Ok(isSuccess);
         }
     }

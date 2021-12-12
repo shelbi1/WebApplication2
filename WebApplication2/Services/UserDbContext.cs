@@ -9,7 +9,7 @@ namespace WebApplication2.Services
 {
         public class UserDbContext : DbContext
         {
-            public UserDbContext(DbContextOptions options) : base(options)
+            public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
             {
                 Database.EnsureCreated();
             }

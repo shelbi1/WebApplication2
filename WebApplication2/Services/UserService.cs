@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication2.Models;
+using WebApplication2.Models.ViewModels.UserViewModel;
 
 namespace WebApplication2.Services
 {
     public interface IUserService
     {
         List<User> GetAll();
-        User GetById(Guid id);
-        bool Save(User user);
-        bool Edit(User user);
-        bool Delete(Guid Id);
+        User GetById(GetByIdUser userModel);
+        bool Save(CreateUserViewModel userModel);
+        bool Edit(EditUserViewModel userModel);
+        bool Delete(DeleteUserViewModel userModel);
     }
 
     public class UserService : IUserService
@@ -29,15 +30,16 @@ namespace WebApplication2.Services
             return _context.CurrentUsers.ToList();
         }
 
-        public User GetById(Guid id)
+        public User GetById(GetByIdUser userModel)
         {
-            return _context.CurrentUsers.First(l => l.Id == id);
+            return _context.CurrentUsers.First(l => l.Id == userModel.Id);
         }
 
-        public bool Save(User user)
+        public bool Save(CreateUserViewModel userModel)
         {
             try
             {
+                var user = new User() { Id = userModel.Id, Nickname = userModel.Nickname, Type = userModel.Type };
                 _context.CurrentUsers.Add(user);
                 _context.SaveChanges();
                 return true;
@@ -48,10 +50,11 @@ namespace WebApplication2.Services
             }
         }
 
-        public bool Edit(User user)
+        public bool Edit(EditUserViewModel userModel)
         {
             try
             {
+                var user = new User() { Id = userModel.Id, Nickname = userModel.Nickname, Type = userModel.Type };
                 var entity = _context.CurrentUsers.First(l => l.Id == user.Id);
                 _context.CurrentUsers.Remove(entity);
                 _context.CurrentUsers.Add(user);
@@ -64,11 +67,11 @@ namespace WebApplication2.Services
             }
         }
 
-        public bool Delete(Guid Id)
+        public bool Delete(DeleteUserViewModel userModel)
         {
             try
             {
-                var entity = _context.CurrentUsers.First(l => l.Id == Id);
+                var entity = _context.CurrentUsers.First(l => l.Id == userModel.Id);
                 _context.CurrentUsers.Remove(entity);
                 _context.SaveChanges();
                 return true;

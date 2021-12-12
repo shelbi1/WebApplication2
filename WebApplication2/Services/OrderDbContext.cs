@@ -9,7 +9,7 @@ namespace WebApplication2.Services
 {
     public class OrderDbContext : DbContext
     {
-        public OrderDbContext(DbContextOptions options) : base(options)
+        public OrderDbContext(DbContextOptions<OrderDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
