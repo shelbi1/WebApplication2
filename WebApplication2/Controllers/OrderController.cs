@@ -37,9 +37,9 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(CreateOrderViewModel orderModel)
+        public IActionResult Create(CreateOrderViewModel orderModel)
         {
-            var isSuccess = _orderService.Save(orderModel);
+            var isSuccess = _orderService.Create(orderModel);
             return Ok(isSuccess);
         }
 

@@ -13,7 +13,7 @@ namespace WebApplication2.Services
             {
                 Database.EnsureCreated();
             }
-
+            
             public DbSet<User> CurrentUsers { get; set; }
         }
 }

@@ -32,9 +32,9 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost]
-        public IActionResult Save(CreateUserViewModel userModel)
+        public IActionResult Create(CreateUserViewModel userModel)
         {
-            var isSuccess = _userService.Save(userModel);
+            var isSuccess = _userService.Create(userModel);
             return Ok(isSuccess);
         }
 

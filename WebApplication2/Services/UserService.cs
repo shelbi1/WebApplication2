@@ -11,7 +11,7 @@ namespace WebApplication2.Services
     {
         List<User> GetAll();
         User GetById(GetByIdUser userModel);
-        bool Save(CreateUserViewModel userModel);
+        bool Create(CreateUserViewModel userModel);
         bool Edit(EditUserViewModel userModel);
         bool Delete(DeleteUserViewModel userModel);
     }
@@ -35,11 +35,11 @@ namespace WebApplication2.Services
             return _context.CurrentUsers.First(l => l.Id == userModel.Id);
         }
 
-        public bool Save(CreateUserViewModel userModel)
+        public bool Create(CreateUserViewModel userModel)
         {
             try
             {
-                var user = new User() { Id = userModel.Id, Nickname = userModel.Nickname, Type = userModel.Type };
+                var user = new User() { Nickname = userModel.Nickname, Type = userModel.Type };
                 _context.CurrentUsers.Add(user);
                 _context.SaveChanges();
                 return true;

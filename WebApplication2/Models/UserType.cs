@@ -7,7 +7,9 @@ namespace WebApplication2.Models
 {
     public enum UserType
     {
+        Administrator,
         Customer, 
-        Performer 
+        Performer, 
+        Guest
     }
 }

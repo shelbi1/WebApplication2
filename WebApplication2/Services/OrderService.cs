@@ -12,7 +12,7 @@ namespace WebApplication2.Services
     {
         List<Order> GetAll();
         Order GetById(GetByIdOrderViewModel orderModel);
-        bool Save(CreateOrderViewModel order);
+        bool Create(CreateOrderViewModel order);
         bool Edit(EditOrderViewModel orderModel);
         bool Delete(DeleteOrderViewModel orderModel);
         List<Order> GetOrdersByCreator(GetOrdersByCreator orderModel);
@@ -37,7 +37,7 @@ namespace WebApplication2.Services
             return _context.CurrentOrders.First(l => l.Id == orderModel.Id);
         }
 
-        public bool Save(CreateOrderViewModel orderModel)
+        public bool Create(CreateOrderViewModel orderModel)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace WebApplication2.Services
         {
             try
             {
-                var order = new Order() { Id = orderModel.Id, Name = orderModel.Name, CreatedBy = orderModel.CreatedBy };
+                var order = new Order() { Id = orderModel.Id, Name = orderModel.Name, CreatedBy = orderModel.CreatedBy};
                 var entity = _context.CurrentOrders.First(l => l.Id == order.Id);
                 _context.CurrentOrders.Remove(entity);
                 _context.CurrentOrders.Add(order);
